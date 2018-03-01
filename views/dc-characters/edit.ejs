@@ -1,0 +1,40 @@
+<div class="container">
+  <form class="form" method="POST" action="/characters/<%= character._id %>">
+
+    <input type="hidden" name="_method" value="PUT">
+
+    <div class="field">
+      <label class="label has-text-black">Name</label>
+      <div class="control">
+        <input class="input" name="name" type="text" placeholder="Name" value="<%= character.name %>" required minlength = "2">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label has-text-black">Alias</label>
+      <div class="control">
+        <input class="input" name="alias" type="text" placeholder="Real Name" value="<%= character.alias %>" required minlength = "2">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label has-text-black">Status</label>
+      <div class="control">
+        <input class="input" name="status" type="text" placeholder="Status" value="<%= character.status %>" required minlength = "2">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label has-text-black">Image</label>
+      <div class="control">
+        <input class="input" name="image" type="text" placeholder="Image"required patter="^http">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label has-text-black">Powers</label>
+      <div class="control">
+        <textarea class="textarea" name="powers" placeholder="Powers" value="<%= character.powers %>" maxlength="500"></textarea>
+      </div>
+    </div>
+    <div class="control">
+      <button class="button submit-button">Submit</button>
+    </div>
+  </form>
+</div>

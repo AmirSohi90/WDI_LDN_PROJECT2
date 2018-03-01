@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="columns is-multiline is-mobile character-sheet">
+    <div class="column is-one-third-desktop is-half-tablet is-full-mobile">
+      <div class="card">
+      <figure class="image">
+        <img src="<%= character.image %>" alt="<%= character.name %>">
+      </figure>
+    </div>
+  </div>
+    <div class="column is-two-thirds-desktop is-half-tablet is-full-mobile">
+      <div class="card character-card">
+        <h3 id="character-name-title" class="title character-name character-name-title has-text-black"><%= character.name %></h3>
+        <h4 id="character-alias-title" class="subtitle character-alias character-alias-title has-text-black"><%= character.alias %></h4>
+        <p class="status has-text-black"><strong>Status:</strong> <%= character.status %></p>
+        <p class="has-text-black"><strong>Powers:</strong> <%= character.powers %></p>
+        <% if(locals.isAuthenticated) { %>
+      <% if(character.isOwnedBy(locals.currentUser) || locals.isAdmin) { %>
+        <div class="buttons-for-novel">
+          <div class="left-button">
+            <a href="/characters/<%= character._id %>/edit" class="button edit-button"><i class="fa fa-pencil"></i></a>
+          </div>
+        <div class="right-button">
+          <form method="POST" action="/characters/<%= character._id %>">
+            <input type="hidden" name="_method" value="DELETE">
+            <button class="button delete-button">Delete</button>
+          </form>
+        </div>
+        <% } %>
+      </div>
+    <% } %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,165 @@
+<div class="container">
+  <div class="columns is-multiline is-mobile character-sheet">
+    <div class="column is-one-quarter-desktop is-half-tablet is-full-mobile">
+      <figure class="image">
+        <img src="<%= novel.image %>" alt="<%= novel.name %>">
+      </figure>
+    </div>
+    <div class="column is-three-quarters-desktop is-half-tablet is-full-mobile">
+      <div class="card character-card">
+        <h3 id="novel-title" class="title character-name-title"><%= novel.title %></h3>
+        <h4 id="novel-writer" class="subtitle character-alias-title"><strong>Writer:</strong> <%= novel.writer %></h4>
+        <h4 id="novel-artist" class="subtitle character-alias-title"><strong>Artist:</strong> <%= novel.artist %></h4>
+        <div class="icon is-small">
+        </div>
+        <p class="novel-synopsis has-text-black"><%= novel.synopsis %></p>
+        <p class="novel-synopsis has-text-black"><strong>Rating: </strong><%= novel.avgRating %> Stars</p>
+        <% if(locals.isAuthenticated) { %>
+      <% if(novel.isOwnedBy(locals.currentUser) || locals.isAdmin) { %>
+    <a href="/novels/<%= novel._id %>/edit" class="button edit-button"><i class="fa fa-pencil"></i></a>
+      <% } %>
+  <div class="buttons-for-novel">
+    <div class="left-button">
+    <% if(!locals.currentUser.hasFavourited(novel)) { %>
+      <form method="POST" action="/novels/<%= novel._id %>/favorite">
+        <input type="hidden" name="_method" value="<% novel._id %>">
+        <button id="favourite"class="button submit-button">+Favourite</button>
+      </form>
+      <% } else { %>
+        <form method="POST" action="/novels/<%= novel._id %>/favorite">
+          <input type="hidden" name="_method" value="DELETE">
+          <button id="unfavourite" class="button delete-button">-Favourite</button>
+        </form>
+        <% } %>
+    </div>
+    <% if(novel.isOwnedBy(locals.currentUser) || locals.isAdmin) { %>
+    <div class="right-button">
+      <form method="POST" action="/novels/<%= novel._id %>">
+        <input type="hidden" name="_method" value="DELETE">
+        <button id="delete" class="button delete-button">Delete</button>
+      </form>
+    </div>
+    <% } %>
+  </div>
+  </div>
+  <hr />
+  </div>
+  <div class="column is-full-desktop is-full-tablet is-full-mobile">
+  <form method="POST" action="/novels/<%= novel._id %>/comments">
+
+    <div class="field">
+      <div class="control">
+        <input name="maintitle" class="input" type="text" placeholder="Add your review title here">
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <textarea class="textarea" name="content"></textarea>
+      </div>
+    </div>
+    <div class="field">
+      <div class="rating">
+        <input type="radio" id="star5" name="rating" value="5" />
+        <label class="full" for="star5"></label>
+        <input type="radio" id="star4" name="rating" value="4" />
+        <label class="full" for="star4"></label>
+        <input type="radio" id="star3" name="rating" value="3" />
+        <label class="full" for="star3"></label>
+        <input type="radio" id="star2" name="rating" value="2" />
+        <label class="full" for="star2"></label>
+        <input type="radio" id="star1" name="rating" value="1" />
+        <label class="full" for="star1"></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <button class="button submit-button">Submit</button>
+    </div>
+  </form>
+
+  <hr />
+
+  <ul class="comments">
+            <% if(locals.isAdmin) { %>
+              <% novel.comments.forEach(comment => { %>
+                <li>
+                <% if(comment.moderated !== true) { %>
+                <div class="box" style="background-color:red;">
+                <% } else {%>
+                <div class="box">
+                <% } %>
+                  <form class="delete" method="POST" action="/novels/<%= novel._id %>/comments/<%= comment._id %>">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <button class="delete">x</button>
+                  </form>
+
+                  <% if(comment.moderated !== true) { %>
+                  <form class="approve" method="POST" action="/novels/<%= novel._id %>/comments/<%= comment._id %>">
+                  <input type="hidden" name="_method" value="PUT">
+                  <button class="primary">Approve</button>
+                  </form>
+                  <% } %>
+
+                  <article class="media">
+                    <div class="media-left">
+                      <figure class="image is-64x64">
+                        <img src="<%= comment.user.thumbnailImage %>" alt="Image">
+                      </figure>
+                    </div>
+                    <div class="media-content">
+                      <div class="content">
+                        <h4> Rating: <%= comment.rating %> Stars </h4>
+                        <p>
+                          <%= comment.content %>
+                        </p>
+                        <p>
+                        <% if(comment.user) { %>
+                          <strong><%= comment.user.username %></strong>
+                        <% } %>
+                        </p>
+                      </div>
+                    </div>
+                  </article>
+                  </div>
+                </li>
+              <% }) %>
+            <% } else { %>
+              <% novel.comments.filter(comment => comment.moderated === true).forEach(comment => { %>
+                <li>
+                <div class="box">
+                <% if(locals.isAuthenticated) { %>
+                  <% if(comment.isOwnedBy(locals.currentUser) || locals.isAdmin) { %>
+                    <form class="delete" method="POST" action="/novels/<%= novel._id %>/comments/<%= comment._id %>">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="delete">x</button>
+                    </form>
+                  <% } %>
+                <% } %>
+                  <article class="media">
+                    <div class="media-left">
+                      <figure class="image is-64x64">
+                        <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+                      </figure>
+                    </div>
+                    <div class="media-content">
+                      <div class="content">
+                        <h4> Rating: <%= comment.rating %> </h4>
+                        <p>
+                          <%= comment.content %>
+                        </p>
+                        <p>
+                        <% if(comment.user) { %>
+                          <strong><%= comment.user.username %></strong>
+                        <% } %>
+                        </p>
+                      </div>
+                    </div>
+                  </article>
+                  </div>
+                </li>
+              <% }) %>
+            <% } %>
+          </ul>
+  <% } %>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<main class="container">
+  <h1 class="title characters-title"><strong><%= locals.currentUser.username %>'s Favorites</strong></h1>
+  <div class="filter">
+    <h3 class="filter-title">Filter by Writer</h3>
+    <form class="" action="/profile/filter" method="POST">
+      <select name="writer">
+        <option value="">All</option>
+        <% const writerList = [] %>
+        <% locals.currentUser.favouriteList.forEach(novel => { %>
+          <% if(!writerList.includes(novel.writer)){ %>
+            <% writerList.push(novel.writer) %>
+            <option value="<%= novel.writer %>"><%= novel.writer %></option>
+          <% } %>
+        <% }) %>
+      </select>
+      <input type="submit" value="Go">
+    </form>
+     <% if(selection) locals.currentUser.favouriteList = locals.currentUser.favouriteList.filter(novel => novel.writer === selection); %>
+   </div>
+   <div>
+  <div class="columns is-multiline is-mobile">
+    <% locals.currentUser.favouriteList.forEach(novel => { %>
+      <div class="column is-half-desktop is-full-tablet is-full-mobile">
+      <a href="/novels/<%= novel._id %>">
+          <div class="card info-card">
+            <div class="left">
+              <div class="card-image">
+                <figure class="image">
+                  <img src="<%= novel.image %>" alt="<%= novel.title %>">
+                </figure>
+              </div>
+              <div class="card-content">
+                <h3 class="title"><%= novel.title %></h3>
+                <h4 class="subtitle"><strong>Writer</strong>: <%= novel.writer %></h4>
+                <h4 class="subtitle"><strong>Artist</strong>: <%= novel.artist %></h4>
+              </div>
+            </div>
+        <div class="right">
+          <a href="/novels/<%= novel._id %>"><p><strong>Synopsis</strong>: <%= novel.synopsis %></p></a>
+          <a href="/novels/<%= novel._id %>"><p><strong>Rating</strong>: <%= novel.avgRating %></p></a>
+        </div>
+        </div>
+        </a>
+        </div>
+    <% }) %>
+  </div>
+</main>

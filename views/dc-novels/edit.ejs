@@ -1,0 +1,40 @@
+<div class="container">
+  <form class="form" method="POST" action="/novels/<%= novel._id %>">
+
+    <input type="hidden" name="_method" value="PUT">
+
+    <div class="field">
+      <label class="label has-text-black">Title</label>
+      <div class="control">
+        <input class="input" name="title" type="text" placeholder="Title" value="<%= novel.title %>" required minlength = "2">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label has-text-black">Writer</label>
+      <div class="control">
+        <input class="input" name="writer" type="text" placeholder="Writer" value="<%= novel.writer %>" required minlength = "2">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label has-text-black">Artist</label>
+      <div class="control">
+        <input class="input" name="artist" type="text" placeholder="Artist" value="<%= novel.artist %>" required minlength = "2">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label has-text-black">Image</label>
+      <div class="control">
+        <input class="input" name="image" type="text" placeholder="Image"required patter="^http">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label has-text-black">Synopsis</label>
+      <div class="control">
+        <textarea class="textarea" name="synopsis" placeholder="Synopsis" value="<%= novel.synopsis %>" maxlength="600"></textarea>
+      </div>
+    </div>
+    <div class="control">
+      <button class="button submit-button">Submit</button>
+    </div>
+  </form>
+</div>

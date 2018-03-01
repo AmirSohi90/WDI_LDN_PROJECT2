@@ -1,0 +1,47 @@
+<div class="container">
+  <form class="form" method="POST" action="/characters">
+    <div class="field">
+      <label class="label has-text-black">Name</label>
+      <div class="control">
+        <input class="input" name="name" type="text" placeholder="Name" required minlength = "2">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label has-text-black">Alias</label>
+      <div class="control">
+        <input class="input" name="alias" type="text" placeholder="Real Name" required minlength = "2">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label has-text-black">Status</label>
+      <div class="control">
+        <select name="status">
+            <option value="Hero">Hero</option>
+            <option value="Villain">Villain</option>
+            <option value="Anti-Hero">Anti-Hero</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label has-text-black">Thumbnail Image</label>
+      <div class="control">
+        <input class="input" name="thumbnailImage" type="text" placeholder="Thumbnail Image" required patter="^http">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label has-text-black">Image</label>
+      <div class="control">
+        <input class="input" name="image" type="text" placeholder="Image" required patter="^http">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label has-text-black">Powers</label>
+      <div class="control">
+        <textarea class="textarea" name="powers" placeholder="Powers" maxlength="500"></textarea>
+      </div>
+    </div>
+    <div class="control">
+      <button class="button submit-button">Submit</button>
+    </div>
+  </form>
+</div>

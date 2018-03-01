@@ -1,0 +1,234 @@
+*{
+  box-sizing: border-box;
+}
+
+body{
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+main{
+  margin-top: 10px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+html{
+  /* background-color: #fcfcfc; */
+  background: linear-gradient(0.25turn, #f5f5f5, #fff, #f5f5f5);
+}
+
+.navbar{
+  width: 100%;
+}
+
+.navbar-item{
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.filter{
+  margin-bottom: 20px;
+}
+
+.info-card {
+  overflow:auto;
+  background-color: #fcfcfc;
+  padding: 10px;
+  -webkit-box-shadow: inset 0px 0px 5px 1px rgba(0,0,0,0.31);
+  -moz-box-shadow: inset 0px 0px 5px 1px rgba(0,0,0,0.31);
+  box-shadow: inset 0px 0px 5px 1px rgba(0,0,0,0.31);
+}
+
+.character-card{
+  padding: 10px;
+  overflow: auto;
+}
+
+.left{
+  width: 50%;
+  float: left;
+  padding: 10px;
+}
+.right{
+  width: 50%;
+  padding: 10px;
+  margin-top: 10px;
+  float: right;
+  -webkit-box-shadow: 1px 0px 9px 1px rgba(0,0,0,0.2);
+  -moz-box-shadow: 1px 0px 9px 1px rgba(0,0,0,0.2);
+  box-shadow: 1px 0px 9px 1px rgba(0,0,0,0.2);
+}
+
+.buttons-for-novel{
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+}
+
+.left-button{
+  width: 50%;
+}
+
+.right-button{
+  width: 50%;
+}
+
+.background {
+  background-image: url(https://www.dccomics.com/sites/default/files/header_5a1f3c21727280.99713319.jpg);
+  background-size: cover;
+}
+
+.card-content{
+  background-color: #f5f5f5;
+  font-family: Greta Sans Condensed Bold,Greta Sans Bold,Arial,sans-serif;
+}
+
+.description-text{
+  background-color: #f5f5f5;
+  padding: 5px;
+}
+
+.title{
+  font-size: 20px;
+}
+
+.subtitle{
+  font-size: 15px;
+}
+
+.submit-button{
+  color: white;
+  background-color: #477be8;
+}
+
+.edit-button{
+  background-color: #c1d1f2;
+}
+
+.delete-button{
+  background-color: #d36980;
+  color: black;
+}
+
+.characters-title{
+  font-family: 'Permanent Marker', cursive;
+  font-size: 40px;
+  text-align: center;
+  color: black;
+}
+
+.filter-title{
+  margin-bottom: 0;
+}
+
+.character-sheet{
+  margin-top: 10px;
+}
+
+#character-name-title{
+  font-size: 40px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+#novel-title{
+  font-size: 40px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+#character-form{
+  width: 200px;
+}
+
+.filter-go-button{
+  width: 40px;
+  outline: none;
+}
+
+.novel-synopsis{
+  margin-bottom: 10px;
+}
+
+.character-alias-title{
+  font-size: 20px;
+}
+
+.status{
+  margin-bottom: 10px;
+}
+
+.home-page-div{
+  background-color: rgba(124, 176, 215, 0.5);
+}
+
+.home-page-title{
+  font-size: 30px;
+  color: white;
+  font-weight: bold;
+}
+
+a{
+  color: black;
+}
+
+.powers-text{
+  color: black;
+}
+
+.form{
+  margin-top: 10px;
+}
+
+form, label { margin: 0; padding: 0; }
+h1 { font-size: 1.5em; margin: 10px; }
+
+/****** Style Star Rating Widget *****/
+
+.rating {
+  border: none;
+  display: flex;
+  flex-direction: row-reverse;
+  width: 140px;
+}
+
+.rating > label:before {
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+.rating > input { display: none; }
+
+.rating > .half:before {
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label {
+  color: #ddd;
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+
+@media (max-width: 1024px){
+  .container{
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}

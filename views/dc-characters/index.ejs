@@ -1,0 +1,40 @@
+<main class="container">
+  <div class="filter">
+    <h1 class="characters-title">DC Characters</h1>
+    <h3 class="filter-title">Filter by Status</h3>
+    <form class="" action="/characters/filter" method="POST">
+      <select id="character-form" name="status">
+        <option value="">All Characters</option>
+          <option value="Hero">Hero</option>
+          <option value="Villain">Villain</option>
+          <option value="Anti-Hero">Anti-Hero</option>
+      </select>
+      <input class="filter-go-button" type="submit" value="Go">
+    </form>
+     <% if(selection) characters = characters.filter(character => character.status === selection); %>
+   </div>
+  <div class="columns is-multiline is-mobile">
+    <% characters.forEach(character => { %>
+      <a href="/characters/<%= character._id %>">
+    <div class="column is-half-desktop is-full-tablet is-full-mobile">
+      <div class="card info-card">
+          <div class="left">
+            <div class="card-image">
+              <figure class="image">
+                <img src="<%= character.thumbnailImage %>" alt="<%= character.name %>">
+              </figure>
+            </div>
+            <div class="card-content">
+              <h3 class="title"><%= character.name %></h3>
+              <h4 class="subtitle"><%= character.alias %></h4>
+            </div>
+          </div>
+          <div class="right">
+            <strong>Powers:</strong> <%= character.powers %></p>
+          </div>
+          </a>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+</main>
