@@ -61,6 +61,7 @@ function novelCreateCommentRoute(req, res, next){
     .then(novel => {
       console.log(novel);
       novel.comments.push(req.body);
+      req.flash('success', 'Thanks for your review! It\'ll be posted once checked by one of our awesome admins');
       return novel.save();
     })
     .then(novel => res.redirect(`/novels/${novel._id}`))
